@@ -7,6 +7,7 @@ import AnnouncementsIcon from '../../assets/AnnouncementsIcon.svg?react'
 import SettingsIcon from '../../assets/SettingsIcon.svg?react'
 import HelpIcon from '../../assets/HelpIcon.svg?react'
 import BrandConfig from '../../config/BrandConfig'
+import { motion } from "motion/react"
 
 const navItems = [
     {name: "Dashboard", href: "/dashboard", icon: DashboardIcon},
@@ -25,20 +26,24 @@ const supportItems = [
 function SidebarLink({ item, sidebarIsCollapsed }) {
     const Icon = item.icon
     return (
-        <a
+         <a
             href={item.href}
-            className='flex items-center py-1 text-[#b1b1b1]
-            hover:bg-[#2b303b] rounded-xl hover:text-[#ffffff]
-            gap-3 px-4 transition-all duration-0'>
+            className='w-full flex items-center py-2 text-[#b1b1b1]
+            hover:bg-[#2b303b] hover:text-[#ffffff]
+            gap-3 pl-4 transition-all duration-0 rounded-md'>
             
             <div className='flex items-center w-4 h-4 shrink-0 transition-all duration-300'>
                 <Icon className='max-w-full max-h-full'/>
             </div>
             
-            <h2 className={`sidebar-name whitespace-nowrap overflow-hidden transition-all duration-300
-                ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100'}`}>
+            <motion.h2
+            layout
+            animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className='sidebar-name whitespace-nowrap overflow-hidden'>
                 {item.name}
-            </h2>
+            </motion.h2>
+            
         </a>
     )
 }
@@ -46,52 +51,73 @@ function SidebarLink({ item, sidebarIsCollapsed }) {
 function Sidenav({ sidebarIsCollapsed }) {
 
     return (
-    <div className={`flex flex-col flex-nowrap bg-[#1d212b] transition-[width] duration-300 ease-in-out ${sidebarIsCollapsed ? 'w-14' : 'w-64'}`}>
+    <motion.div
+    layout
+    animate={{ width: sidebarIsCollapsed ? '5%' : '20%' }}
+    transition={{ duration: 0.3, ease: 'easeInOut' }}
+    className='flex flex-col flex-nowrap bg-[#1d212b]'>
+
             {/* Brand Header */}
-            <div className='flex items-center p-4 pt-5'>
+            <motion.div
+            layout
+            animate={{ paddingLeft: sidebarIsCollapsed ? '0.75rem' : '1rem' }}
+            className='flex items-center pt-5'>
 
-                <img src={BrandConfig.logo}
+                <motion.img src={BrandConfig.logo}
                 alt={BrandConfig.name}
-                className={`object-contain rounded-md will-change-image transition-width transition-height duration-300
-                    ${sidebarIsCollapsed ? 'w-6 h-6 transform-gpu' : 'w-9 h-9'}`}
-                />
+                layout
+                animate={{ width: sidebarIsCollapsed ? 38 : 58 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='object-contain rounded-md'/>
 
-                <div className={`brand-name text-[#b1b1b1] pl-4 ease-in-out
-                duration-500 whitespace-nowrap overflow-hidden
-                    ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100 w-auto pl-4'}`}>
+                <motion.div 
+                layout
+                animate={{
+                    opacity: sidebarIsCollapsed ? 0 : 1,
+                    display: sidebarIsCollapsed ? 'none' : 'flex'
+                }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='brand-name flex flex-nowrap whitespace-nowrap text-[#b1b1b1] pl-4'>
                     {BrandConfig.name}
-                </div>
-            </div>
+                </motion.div>
+
+            </motion.div>
 
             {/* Main Nav Items */}
-            <div className="flex flex-col gap-1">
-                <h3 className={`text-[#b1b1b1] sidebar-header-text pl-4 mt-12 mb-4 ease-in-out duration-300
-                    ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100 w-auto pl-4'}`}>
+            <nav className="flex flex-col">
+
+                <motion.h3
+                layout
+                animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='sidebar-header-text text-[#b1b1b1] pl-4 pb-4 p-12'>
                     Main
-                </h3>
+                </motion.h3>
+
                 {navItems.map(item => (
                     <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
                 ))}
-            </div>
+
+            </nav>
 
             {/* Support Nav Items */}
-            <div className="flex flex-col gap-1 mt-auto text-[#b1b1b1]">
-                <h3 className={`text-[#b1b1b1] sidebar-header-text pl-4 mt-12 mb-2 ease-in-out duration-300
-                    ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100 w-auto pl-4'}`}>
+            <nav className="flex flex-col mt-auto">
+
+                <motion.h3
+                layout
+                animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='sidebar-header-text text-[#b1b1b1] pl-4 pb-4 p-12'>
                     Support
-                </h3>
+                </motion.h3>
 
                 {supportItems.map(item => (
                     <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
                 ))}
-                
-            </div>
 
-            {/* Footer Profile */}
-            <div className="">
-                
-            </div>
-    </div>
+            </nav>
+
+    </motion.div>
     )
 }
 

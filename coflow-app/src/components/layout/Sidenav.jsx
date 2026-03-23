@@ -8,21 +8,42 @@ import SettingsIcon from '../../assets/SettingsIcon.svg?react'
 import HelpIcon from '../../assets/HelpIcon.svg?react'
 import BrandConfig from '../../config/BrandConfig'
 
+const navItems = [
+    {name: "Dashboard", href: "/dashboard", icon: DashboardIcon},
+    {name: "Members", href: "/members", icon: MembersIcon},
+    {name: "Spaces", href: "/spaces", icon: SpacesIcon},
+    {name: "Events", href: "/events", icon: EventsIcon},
+    {name: "Tasks", href: "/tasks", icon: TasksIcon},
+    {name: "Announcements", href: "/announcements", icon: AnnouncementsIcon},
+]
+
+const supportItems = [
+    {name: "Settings", href: "/settings", icon: SettingsIcon},
+    {name: "Help", href: "/help", icon: HelpIcon}
+]
+
+function SidebarLink({ item, sidebarIsCollapsed }) {
+    const Icon = item.icon
+    return (
+        <a
+            href={item.href}
+            className='flex items-center py-1 text-[#b1b1b1]
+            hover:bg-[#2b303b] rounded-xl hover:text-[#ffffff]
+            gap-3 px-4'>
+            
+            <div className='flex items-center w-4 h-4 shrink-0 transition-all duration-600'>
+                <Icon className='max-w-full max-h-full'/>
+            </div>
+            
+            <h2 className={`sidebar-name whitespace-nowrap overflow-hidden transition-all duration-600
+                ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100'}`}>
+                {item.name}
+            </h2>
+        </a>
+    )
+}
+
 function Sidenav({ sidebarIsCollapsed }) {
-
-    const navItems = [
-        {name: "Dashboard", href: "/dashboard", icon: DashboardIcon},
-        {name: "Members", href: "/members", icon: MembersIcon},
-        {name: "Spaces", href: "/spaces", icon: SpacesIcon},
-        {name: "Events", href: "/events", icon: EventsIcon},
-        {name: "Tasks", href: "/tasks", icon: TasksIcon},
-        {name: "Announcements", href: "/announcements", icon: AnnouncementsIcon},
-    ]
-
-    const supportItems = [
-        {name: "Settings", href: "/settings", icon: SettingsIcon},
-        {name: "Help", href: "/help", icon: HelpIcon}
-    ]
 
     return (
     <div className={`flex flex-col flex-nowrap bg-[#1d212b] transition-[width] duration-500 ease-in-out ${sidebarIsCollapsed ? 'w-14' : 'w-64'}`}>
@@ -48,26 +69,9 @@ function Sidenav({ sidebarIsCollapsed }) {
                     ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100 w-auto pl-4'}`}>
                     Main
                 </h3>
-                {navItems.map(item => {
-                    const Icon = item.icon
-                    return (
-                        <a key={item.name}
-                            href={item.href}
-                            className='flex items-center py-1 text-[#b1b1b1]
-                            hover:bg-[#2b303b] rounded-xl hover:text-[#ffffff]
-                            gap-3 px-4'>
-                            
-                            <div className='flex items-center w-4 h-4 shrink-0 transition-all duration-600'>
-                                <Icon className='max-w-full max-h-full'/>
-                            </div>
-                            
-                            <h2 className={`sidebar-name whitespace-nowrap overflow-hidden transition-all duration-600
-                                ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100'}`}>
-                                {item.name}
-                            </h2>
-                        </a>
-                    )
-                })}
+                {navItems.map(item => (
+                    <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
+                ))}
             </div>
 
             {/* Support Nav Items */}
@@ -77,26 +81,9 @@ function Sidenav({ sidebarIsCollapsed }) {
                     Support
                 </h3>
 
-                {supportItems.map(item => {
-                const Icon = item.icon
-                return (
-                    <a key={item.name}
-                        href={item.href}
-                        className='flex items-center py-1 text-[#b1b1b1]
-                        hover:bg-[#2b303b] rounded-xl hover:text-[#ffffff]
-                        gap-3 px-4'>
-                        
-                        <div className='flex items-center w-4 h-4 shrink-0 transition-all duration-600'>
-                            <Icon className='max-w-full max-h-full'/>
-                        </div>
-                        
-                        <h2 className={`sidebar-name whitespace-nowrap overflow-hidden transition-all duration-600
-                            ${sidebarIsCollapsed ? 'transform-gpu opacity-0' : 'opacity-100'}`}>
-                            {item.name}
-                        </h2>
-                    </a>
-                )
-            })}
+                {supportItems.map(item => (
+                    <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
+                ))}
                 
             </div>
 

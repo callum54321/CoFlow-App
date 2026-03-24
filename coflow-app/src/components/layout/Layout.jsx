@@ -23,6 +23,10 @@ const Layout = ({children}) => {
                 {/* Grey Out Overlay */}
                 <motion.div
                 layout
+                initial={{
+                    opacity: 0,
+                    pointerEvents: 'none'
+                }}
                 animate={{
                     opacity: sidebarIsCollapsed ? 0 : 1,
                     pointerEvents: sidebarIsCollapsed ? 'none' : 'auto'

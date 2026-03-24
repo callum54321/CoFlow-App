@@ -38,12 +38,13 @@ function SidebarLink({ item, sidebarIsCollapsed }) {
             
             <motion.h2
             layout
+            initial={{ opacity: 0 }}
             animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
             className='sidebar-name whitespace-nowrap overflow-hidden'>
                 {item.name}
             </motion.h2>
-            
+
         </a>
     )
 }
@@ -53,6 +54,7 @@ function Sidenav({ sidebarIsCollapsed }) {
     return (
     <motion.div
     layout
+    initial={{ width: '5%' }}
     animate={{ width: sidebarIsCollapsed ? '5%' : '20%' }}
     transition={{ duration: 0.3, ease: 'easeInOut' }}
     className='flex flex-col flex-nowrap bg-[#1d212b]'>
@@ -60,18 +62,24 @@ function Sidenav({ sidebarIsCollapsed }) {
             {/* Brand Header */}
             <motion.div
             layout
+            initial={{ paddingLeft: '0.75rem' }}
             animate={{ paddingLeft: sidebarIsCollapsed ? '0.75rem' : '1rem' }}
             className='flex items-center pt-5'>
 
                 <motion.img src={BrandConfig.logo}
                 alt={BrandConfig.name}
                 layout
+                initial={{ width: 38 }}
                 animate={{ width: sidebarIsCollapsed ? 38 : 58 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className='object-contain rounded-md'/>
 
                 <motion.div 
                 layout
+                initial={{
+                    opacity: 0,
+                    display: 'none'
+                }}
                 animate={{
                     opacity: sidebarIsCollapsed ? 0 : 1,
                     display: sidebarIsCollapsed ? 'none' : 'flex'
@@ -88,6 +96,7 @@ function Sidenav({ sidebarIsCollapsed }) {
 
                 <motion.h3
                 layout
+                initial={{ opacity: 0 }}
                 animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className='sidebar-header-text text-[#b1b1b1] pl-4 pb-4 p-12'>
@@ -105,6 +114,7 @@ function Sidenav({ sidebarIsCollapsed }) {
 
                 <motion.h3
                 layout
+                initial={{ opacity: 0 }}
                 animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 className='sidebar-header-text text-[#b1b1b1] pl-4 pb-4 p-12'>

@@ -1,6 +1,17 @@
 import MenuIcon from '../../assets/MenuIcon.svg?react'
+import { useLocation } from 'react-router-dom';
 
 function Header({ sidebarClick }) {
+    const location = useLocation()
+
+    const getPageTitle = () => {
+        const path = location.pathname.split('/').filter(Boolean).pop()
+        return path
+            .split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+    }
+
     return (
         <div className="flex flex-row items-center h-16 bg-white shadow-sm">
             <button 
@@ -10,9 +21,8 @@ function Header({ sidebarClick }) {
             >
                 <MenuIcon className="w-5 h-5" />
             </button>
-            <h1 className="pl-3.5 font-semibold text-gray-800">
-                Dashboard
-            </h1>
+
+            <div className='pl-3'>{getPageTitle()}</div>
         </div>
     )
 }

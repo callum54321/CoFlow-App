@@ -2,6 +2,7 @@ import Header from './Header'
 import Sidenav from './Sidenav'
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { Outlet } from 'react-router-dom'
 
 const Layout = ({children}) => {
     const [sidebarIsCollapsed, setSidebarIsCollapsed] = useState(true)
@@ -32,14 +33,14 @@ const Layout = ({children}) => {
                     pointerEvents: sidebarIsCollapsed ? 'none' : 'auto'
                 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className='absolute bg-[#00000031] inset-0'
+                className='absolute bg-[#0000003b] inset-0'
                 onClick = {() => setSidebarIsCollapsed(true)}>
                 </motion.div>
 
                 {/* Main Content */}
                 <Header sidebarClick={sidebarClick}/>
-                main content
-                {children}
+
+                <Outlet />
 
             </main>
         </div>

@@ -8,6 +8,7 @@ import SettingsIcon from '../../assets/SettingsIcon.svg?react'
 import HelpIcon from '../../assets/HelpIcon.svg?react'
 import BrandConfig from '../../config/BrandConfig'
 import { motion } from "motion/react"
+import { NavLink } from 'react-router-dom'
 
 const navItems = [
     {name: "Dashboard", href: "/dashboard", icon: DashboardIcon},
@@ -26,11 +27,11 @@ const supportItems = [
 function SidebarLink({ item, sidebarIsCollapsed }) {
     const Icon = item.icon
     return (
-         <a
-            href={item.href}
-            className='w-full flex items-center py-2 text-[#b1b1b1]
-            hover:bg-[#2b303b] hover:text-[#ffffff]
-            gap-3 pl-4 transition-all duration-0 rounded-md'>
+        <NavLink
+        to={item.href}
+        className='w-full flex items-center py-2 text-[#b1b1b1]
+        hover:bg-[#2b303b] hover:text-[#ffffff]
+        gap-3 pl-4 transition-all duration-0 rounded-md'>
             
             <div className='flex flex-col items-center w-5 h-5 shrink-0 transition-all duration-300'>
                 <Icon className='max-w-full max-h-full'/>
@@ -44,8 +45,7 @@ function SidebarLink({ item, sidebarIsCollapsed }) {
             className='sidebar-name items-center whitespace-nowrap overflow-hidden'>
                 {item.name}
             </motion.h2>
-
-        </a>
+        </NavLink>
     )
 }
 
@@ -88,7 +88,6 @@ function Sidenav({ sidebarIsCollapsed }) {
                 className='brand-name flex flex-nowrap whitespace-nowrap text-[#b1b1b1] pl-4'>
                     {BrandConfig.name}
                 </motion.div>
-
             </motion.div>
 
             {/* Main Nav Items */}
@@ -106,7 +105,6 @@ function Sidenav({ sidebarIsCollapsed }) {
                 {navItems.map(item => (
                     <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
                 ))}
-
             </nav>
 
             {/* Support Nav Items */}
@@ -124,9 +122,7 @@ function Sidenav({ sidebarIsCollapsed }) {
                 {supportItems.map(item => (
                     <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
                 ))}
-
             </nav>
-
     </motion.div>
     )
 }

@@ -6,6 +6,12 @@ function Header({ sidebarClick }) {
 
     const getPageTitle = () => {
         const path = location.pathname.split('/').filter(Boolean).pop()
+
+        //Empty path edge case
+        if (!path) {
+            return 'Home'
+        }
+        
         return path
             .split('-')
             .map(word => word.charAt(0).toUpperCase() + word.slice(1))

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+mongoose.connect('mongodb+srv://callumbarkus04_db_user:<db_password>@cluster0.vnp5yyg.mongodb.net/?appName=Cluster0')
+
 const userSchema = mongoose.Schema({
     username: String,
     password: String

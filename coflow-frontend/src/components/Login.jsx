@@ -28,7 +28,7 @@ function Login() {
                     placeholder="Enter username"
                     className="border-black"/>
 
-                    <input type="text"
+                    <input type="password"
                     name="password"
                     placeholder="Enter password"/>
 

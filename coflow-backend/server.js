@@ -1,18 +1,24 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const UserModel = require('./config/database')
 
 app.use(cors())
+app.use(express.urlencoded({ extended: true }))
 
 //Route
+app.post('/api/register', (req, res) => {
+    let newUser = new UserModel({
+        username: req.body.username,
+        password: req.body.password
+    })
 
-app.get('/api/login', (req, res) => {
-    const users = [
-        {id: 1, name: 'John Smith', email: 'johnsmith@gmail.com'},
-        {id: 2, name: 'Jane Smith', email: 'janesmith@gmail.com'},
-        {id: 3, name: 'Adam Johnson', email: 'adamjohnson@gmail.com'},
-    ]
-    
+    user.save().then(console.log(newUser))
+
+    res.send({ success: true })
+})
+
+app.post('/api/login', (req, res) => {
     res.json(users)
 })
 

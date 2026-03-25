@@ -26,6 +26,7 @@ const supportItems = [
 
 function SidebarLink({ item, sidebarIsCollapsed }) {
     const Icon = item.icon
+    
     return (
         <NavLink
         to={item.href}
@@ -95,16 +96,25 @@ function Sidenav({ sidebarIsCollapsed }) {
 
                 <motion.h3
                 layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: sidebarIsCollapsed ? 0 : 1 }}
+                initial={{
+                    opacity: 0,
+                    padding: '3rem',
+                    paddingLeft: '1rem',
+                    paddingBottom: '1rem',
+                }}
+                animate={{
+                    opacity: sidebarIsCollapsed ? 0 : 1,
+                    padding: sidebarIsCollapsed ? '2rem' : '5rem',
+                }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
-                className='sidebar-header-text text-[#b1b1b1] pl-4 pb-4 p-12'>
+                className='sidebar-header-text text-[#b1b1b1]'>
                     Main
                 </motion.h3>
 
                 {navItems.map(item => (
                     <SidebarLink key={item.name} item={item} sidebarIsCollapsed={sidebarIsCollapsed} />
                 ))}
+
             </nav>
 
             {/* Support Nav Items */}
